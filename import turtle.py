@@ -3,14 +3,10 @@ import math
 import random
 
 wn=turtle.Screen()
-wn.bgcolor("black")
+wn.bgcolor("yellow")
 wn.title("A MAZE GAME")
 wn.setup(700,700)
 wn.tracer(0)
-#register shapes
-images=["wizard_right.gif","wizard_left.gif","treasure.gif","wall.gif","enemy_left.gif","enemy_right.gif"]
-for image in images:
-    turtle.register_shape(image)
 
 #create pen
 class Pen(turtle.Turtle):
@@ -23,7 +19,7 @@ class Pen(turtle.Turtle):
 class Player(turtle.Turtle) :
     def __init__(self):
         turtle.Turtle.__init__(self)
-        self.shape("wizard_right.gif")
+        self.shape("square")
         self.color("blue")
         self.penup()
         self.speed(0)  
@@ -48,7 +44,7 @@ class Player(turtle.Turtle) :
     def go_left(self):
         move_to_x=self.xcor()-24
         move_to_y=self.ycor()
-        self.shape("wizard_left.gif")
+        self.shape("square")
 
         if(move_to_x,move_to_y) not in walls:
             self.goto(move_to_x,move_to_y)
@@ -56,7 +52,7 @@ class Player(turtle.Turtle) :
     def go_right(self):
         move_to_x=self.xcor()+24
         move_to_y=self.ycor()
-        self.shape("wizard_right.gif")
+        self.shape("square")
         
         if(move_to_x,move_to_y) not in walls:
             self.goto(move_to_x,move_to_y)
@@ -72,7 +68,7 @@ class Player(turtle.Turtle) :
 class Treasure(turtle.Turtle):
     def __init__(self,x,y):
         turtle.Turtle.__init__(self) 
-        self.shape("treasure.gif")
+        self.shape("circle")
         self.color("gold")
         self.penup()
         self.speed(0)
@@ -85,7 +81,7 @@ class Treasure(turtle.Turtle):
 class Enemy(turtle.Turtle):
     def _init_(self,x,y):
         turtle.Turtle.__init__(self)
-        self.shape("enemy_left.gif")
+        self.shape("triangle")
         self.color("red")
         self.penup()
         self.speed(0)
@@ -104,11 +100,11 @@ class Enemy(turtle.Turtle):
         elif self.direction=="left":
             dx=-24
             dy=0
-            self.shape("enemy_left.gif") 
+            self.shape("triangle") 
         elif self.direction=="right":
             dx=24
             dy=0
-            self.shape("enemy_right.gif")
+            self.shape("triangle")
         else:
             dx=0  
             dy=0 
@@ -194,7 +190,7 @@ def setup_maze(level):
             screen_y=288-(y*24)
             if character =="X":
                 pen.goto(screen_x,screen_y)
-                pen.shape("wall.gif")
+                pen.shape("square")
                 pen.stamp()
                 walls.append((screen_x,screen_y))  
             if character=="P":
@@ -228,6 +224,9 @@ while True:
         if player.is_collison(enemy):
             print("player dies")   
     wn.update()         
+
+
+
 
 
 
